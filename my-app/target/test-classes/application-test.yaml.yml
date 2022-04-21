@@ -1,0 +1,7 @@
+## YAML Template.
+---
+ebean:
+    test:
+        platform: sqlite
+        ddlMode: dropCreate
+        dbName: myBook
