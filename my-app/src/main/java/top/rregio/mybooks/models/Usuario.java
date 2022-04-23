@@ -1,14 +1,11 @@
 package top.rregio.mybooks.models;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import org.joda.time.DateTime;
+import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import top.rregio.mybooks.utils.UsuarioUtilidades;
 /**
- *
+ * Representa um usuário no sistema mybook
  * @author rodrigo
  */
 @Entity
@@ -24,22 +21,23 @@ public class Usuario {
     @Column
     private String biografia;
     @Column
-    private DateTime dataRegistro; 
+    private String dataRegistro;
+
+    public Usuario(){
+        this.uuid=UUID.randomUUID();
+        this.dataRegistro=new Date().toString();
+    } 
 
     public Usuario(String email, String senha, String nome){
+        this.uuid = UUID.randomUUID();
         this.email=email;
-        MessageDigest algo = MessageDigest.getInstance("MD5");
-        byte messageDigest[]=algo.digest(senha.getBytes());
-
-        this.senha=messageDigest.toString();
+        this.senha=UsuarioUtilidades.senhaCriptografada(senha);
+        this.nome=nome;
+        this.dataRegistro = new Date().toString();
     }
 
     public UUID getUuid() {
         return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public String getEmail() {
@@ -55,7 +53,7 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.senha= UsuarioUtilidades.senhaCriptografada(senha);
     }
 
     public String getNome() {
@@ -74,11 +72,7 @@ public class Usuario {
         this.biografia = biografia;
     }
 
-    public DateTime getDataRegistro() {
+    public String getDataRegistro() {
         return dataRegistro;
-    }
-
-    public void setDataRegistro(DateTime dataRegistro) {
-        this.dataRegistro = dataRegistro;
     }
 }
