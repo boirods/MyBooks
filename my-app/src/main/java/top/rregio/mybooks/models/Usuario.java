@@ -3,13 +3,15 @@ import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import io.ebean.Model;
 import top.rregio.mybooks.utils.UsuarioUtilidades;
 /**
  * Representa um usuário no sistema mybook
  * @author rodrigo
  */
 @Entity
-public class Usuario {
+public class Usuario extends Model {
     @Column
     private UUID uuid;
     @Column

@@ -1,2 +1,6 @@
 #não lembro como é comentario no gitignore, mas está criado'
 my-app/target
+my-app/.classpath
+my-app/.project
+my-app/.settings
+
